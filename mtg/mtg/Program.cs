@@ -5,6 +5,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json.Linq;
 
 namespace mtg
 {
@@ -26,12 +27,13 @@ namespace mtg
             //    Console.WriteLine(account.Email);
             //    Console.ReadLine();
                 // james@example.com
+            String json;
             try
             {
-                using (StreamReader sr = new StreamReader("../../AllCards-x.json"))
+                using (StreamReader sr = new StreamReader("..\\..\\..\\AllCards-x.json"))
                 {
-                    String line = sr.ReadToEnd();
-                    Console.WriteLine(line);
+                    json = sr.ReadToEnd();
+                    //Console.WriteLine(line);
                     Console.ReadLine();
                 }
             }
@@ -40,6 +42,9 @@ namespace mtg
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
             }
+
+
+            dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
 
         }
     }
