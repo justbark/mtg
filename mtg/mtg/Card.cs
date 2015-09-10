@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mtg
 {
-    class Card
+    /*class Card
     {
         public string name;
         public string manaCost;
@@ -27,5 +27,5 @@ namespace mtg
         public int multiverseID;
         public string imageName;
         public string ID;
-    }
+    }*/
 }

@@ -27,7 +27,7 @@ namespace mtg
             //    Console.WriteLine(account.Email);
             //    Console.ReadLine();
                 // james@example.com
-            String json;
+            String json = "";
             try
             {
                 using (StreamReader sr = new StreamReader("..\\..\\..\\AllCards-x.json"))
@@ -44,7 +44,24 @@ namespace mtg
             }
 
 
-            dynamic obj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+            dynamic obj = null;
+            if (!String.IsNullOrEmpty(json))
+            {
+                obj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
+                foreach (JObject result in obj)
+                {
+                    foreach (JProperty property in result.Properties())
+                    {
+                        // do something with the property belonging to result
+                        Console.WriteLine(property.Name);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("JSON string is empty");
+                return;
+            }
 
         }
     }
