@@ -53,7 +53,7 @@ namespace mtg
             Console.ReadLine();
 
         }
-        void getSentences(List<Card>mycards)
+        static void getSentences(List<Card>mycards)
         {
             var masterList = new List<String>();
             for (int i = 0; i < mycards.Count; i++ )
