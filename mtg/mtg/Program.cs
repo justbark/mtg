@@ -48,9 +48,20 @@ namespace mtg
                 //just display the first 100
                 Console.WriteLine(cards[i].name);
             }
+            getSentences(cards);
             Console.WriteLine(cards.Count); // total number of cards
             Console.ReadLine();
 
+        }
+        void getSentences(List<Card>mycards)
+        {
+            var masterList = new List<String>();
+            for (int i = 0; i < mycards.Count; i++ )
+            {
+                var mySentences = mycards[i].text.Split('.').Distinct().ToList();
+                masterList.AddRange(mySentences);
+            }
+            File.WriteAllLines("allCardText.txt", masterList.ConvertAll(Convert.ToString));
         }
     }
 }
