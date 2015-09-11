@@ -27,14 +27,13 @@ namespace mtg
             //    Console.WriteLine(account.Email);
             //    Console.ReadLine();
                 // james@example.com
+            var cards = new List<Card>();
             String json = "";
             try
             {
                 using (StreamReader sr = new StreamReader("..\\..\\..\\AllCards-x.json"))
                 {
                     json = sr.ReadToEnd();
-                    //Console.WriteLine(line);
-                    Console.ReadLine();
                 }
             }
             catch (Exception e)
@@ -44,24 +43,21 @@ namespace mtg
             }
 
 
-            dynamic obj = null;
-            if (!String.IsNullOrEmpty(json))
+            dynamic data = JsonConvert.DeserializeObject(json);
+            IDictionary<string, JToken> raw_cards = data;
+
+            Card new_card;
+            foreach (var card in raw_cards)
             {
-                obj = Newtonsoft.Json.JsonConvert.DeserializeObject(json);
-                foreach (JObject result in obj)
-                {
-                    foreach (JProperty property in result.Properties())
-                    {
-                        // do something with the property belonging to result
-                        Console.WriteLine(property.Name);
-                    }
-                }
+                new_card = JsonConvert.DeserializeObject<Card>(card.Value.ToString());
+                cards.Add(new_card);
             }
-            else
+
+            for (int i = 0; i < 100; i++)
             {
-                Console.WriteLine("JSON string is empty");
-                return;
+                Console.WriteLine(cards[i].name);
             }
+                Console.ReadLine();
 
         }
     }

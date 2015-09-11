@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,26 +7,29 @@ using System.Threading.Tasks;
 
 namespace mtg
 {
-    /*class Card
+    class Card
     {
-        public string name;
-        public string manaCost;
-        public int cmc;
-        public string colors;
+        [JsonProperty("name")]
+        public string name { get; set; }
+        [JsonProperty("manaCost")]
+        public string manaCost { get; set;}
+        [JsonProperty("cmc")]
+        public float cmc { get; set; }
+        /*public string colors;
         public string type;
-        public string superTypes;
+        public string supertypes;
         public string types;
-        public string subTypes;
+        public string subtypes;
         public string rarity;
         public string text;
         public string flavor;
         public string artist;
-        public int nunmber;
+        public int number;
         public int power;
         public int toughness;
         public string layout;
-        public int multiverseID;
+        public int multiverseid;
         public string imageName;
-        public string ID;
-    }*/
+        public string id;*/
+    }
 }
