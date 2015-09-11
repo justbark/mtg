@@ -13,20 +13,6 @@ namespace mtg
     {
         static void Main(string[] args)
         {
-            //string json = @"{
-            //    'Email': 'james@example.com',
-            //    'Active': true,
-            //    'CreatedDate': '2013-01-20T00:00:00Z',
-            //    'Roles': [
-            //    'User',
-            //    'Admin'
-            //    ]
-            //    }";
-            //
-            //    Account account = JsonConvert.DeserializeObject<Account>(json);
-            //    Console.WriteLine(account.Email);
-            //    Console.ReadLine();
-                // james@example.com
             var cards = new List<Card>();
             String json = "";
             try
@@ -40,24 +26,30 @@ namespace mtg
             {
                 Console.WriteLine("The file could not be read:");
                 Console.WriteLine(e.Message);
+                return;
             }
 
 
             dynamic data = JsonConvert.DeserializeObject(json);
             IDictionary<string, JToken> raw_cards = data;
+            //this is very complicated. Joe will explain later in more detail
 
             Card new_card;
             foreach (var card in raw_cards)
             {
                 new_card = JsonConvert.DeserializeObject<Card>(card.Value.ToString());
+                // <Card> this is a template type. You can write a piece of code that can
+                //work with any code
                 cards.Add(new_card);
             }
 
             for (int i = 0; i < 100; i++)
             {
+                //just display the first 100
                 Console.WriteLine(cards[i].name);
             }
-                Console.ReadLine();
+            Console.WriteLine(cards.Count); // total number of cards
+            Console.ReadLine();
 
         }
     }
