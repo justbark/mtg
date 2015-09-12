@@ -49,10 +49,10 @@ namespace mtg
         public int number { get; set;}
 
         [JsonProperty("power")]
-        public int power { get; set;}
+        public string power { get; set;}
 
         [JsonProperty("toughness")]
-        public int toughness { get; set;}
+        public string toughness { get; set;}
 
         [JsonProperty("layout")]
         public string layout { get; set;}

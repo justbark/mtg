@@ -2,6 +2,5 @@ C:\Users\Justin\Documents\GitHub\mtg\mtg\mtg\bin\Debug\mtg.exe.config
 C:\Users\Justin\Documents\GitHub\mtg\mtg\mtg\bin\Debug\mtg.exe
 C:\Users\Justin\Documents\GitHub\mtg\mtg\mtg\bin\Debug\mtg.pdb
 C:\Users\Justin\Documents\GitHub\mtg\mtg\mtg\bin\Debug\Newtonsoft.Json.dll
-C:\Users\Justin\Documents\GitHub\mtg\mtg\mtg\obj\Debug\mtg.csprojResolveAssemblyReference.cache
 C:\Users\Justin\Documents\GitHub\mtg\mtg\mtg\obj\Debug\mtg.exe
 C:\Users\Justin\Documents\GitHub\mtg\mtg\mtg\obj\Debug\mtg.pdb

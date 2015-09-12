@@ -56,9 +56,12 @@ namespace mtg
         static void getSentences(List<Card>mycards)
         {
             var masterList = new List<String>();
+            List<String> mySentences;
             for (int i = 0; i < mycards.Count; i++ )
             {
-                var mySentences = mycards[i].text.Split('.').Distinct().ToList();
+                if (String.IsNullOrEmpty(mycards[i].text))
+                    continue;
+                mySentences = mycards[i].text.Split('.').Distinct().ToList();
                 masterList.AddRange(mySentences);
             }
             File.WriteAllLines("allCardText.txt", masterList.ConvertAll(Convert.ToString));
