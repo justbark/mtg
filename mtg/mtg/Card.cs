@@ -19,19 +19,19 @@ namespace mtg
         public float cmc { get; set; }
 
         [JsonProperty("colors")]
-        public string colors { get; set;}
+        public List<string> colors { get; set; }
 
         [JsonProperty("type")]
         public string type { get; set;}
 
         [JsonProperty("supertypes")]
-        public string supertypes {get; set;}
+        public List<string> supertypes { get; set; }
 
         [JsonProperty("types")]
-        public string types { get; set;}
+        public List<string> types { get; set; }
 
         [JsonProperty("subtypes")]
-        public string subtypes { get; set;}
+        public List<string> subtypes { get; set; }
 
         [JsonProperty("rarity")]
         public string rarity { get; set;}
