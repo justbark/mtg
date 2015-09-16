@@ -9,11 +9,15 @@ using Newtonsoft.Json.Linq;
 
 namespace mtg
 {
+    public static class Shared
+    {
+        public static List<Card> cards = new List<Card>();
+    }
+
     class Program
     {
         static void Main(string[] args)
         {
-            var cards = new List<Card>();
             String json = "";
             try
             {
@@ -40,7 +44,7 @@ namespace mtg
                 new_card = JsonConvert.DeserializeObject<Card>(card.Value.ToString());
                 // <Card> this is a template type. You can write a piece of code that can
                 //work with any code
-                cards.Add(new_card);
+                Shared.cards.Add(new_card);
             }
 
             /*for (int i = 0; i < 100; i++) // just checking if we have data
@@ -50,25 +54,25 @@ namespace mtg
             }*/
 
             string line;
-            Console.WriteLine(cards.Count); // total number of cards
+            Console.WriteLine(Shared.cards.Count); // total number of cards
             line = Console.ReadLine(); //wait for text to generate all sentences file
             if ( line == "getSentences" )
-                getSentences(cards);
+                getSentences(Shared.cards);
             if (line == "getCard")
             {
                 string userSelCard;
                 Console.WriteLine("type card name.");
                 userSelCard = Console.ReadLine();
-                retrieveCard(userSelCard, cards);
+                retrieveCard(userSelCard);
             }
             
 
 
         }
-        static void retrieveCard(string selectedCard, List<Card>allCards)
+        static void retrieveCard(string selectedCard)
         {
             string cardName = selectedCard;
-            var cardQuery = from card in allCards
+            var cardQuery = from card in Shared.cards
                             where card.name == cardName
                             orderby card.name ascending
                             select card;
@@ -80,7 +84,7 @@ namespace mtg
                 Console.WriteLine("card power = " + card.power);
                 Console.WriteLine("card toughness = " + card.toughness);
                 Console.WriteLine("card manaCost = " + card.manaCost);
-                Console.WriteLine("card colors = " + card.colors);
+                Console.WriteLine("card colors = " + String.Join(", " , card.colors));
                 Console.WriteLine("------EndSelectedCard-------");
                 Console.ReadLine();
             }
