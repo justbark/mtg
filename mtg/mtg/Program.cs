@@ -43,16 +43,51 @@ namespace mtg
                 cards.Add(new_card);
             }
 
-            for (int i = 0; i < 100; i++)
+            /*for (int i = 0; i < 100; i++) // just checking if we have data
             {
                 //just display the first 100
                 Console.WriteLine(cards[i].name);
-            }
-            getSentences(cards);
+            }*/
+
+            string line;
             Console.WriteLine(cards.Count); // total number of cards
-            Console.ReadLine();
+            line = Console.ReadLine(); //wait for text to generate all sentences file
+            if ( line == "getSentences" )
+                getSentences(cards);
+            if (line == "getCard")
+            {
+                string userSelCard;
+                Console.WriteLine("type card name.");
+                userSelCard = Console.ReadLine();
+                retrieveCard(userSelCard, cards);
+            }
+            
+
 
         }
+        static void retrieveCard(string selectedCard, List<Card>allCards)
+        {
+            string cardName = selectedCard;
+            var cardQuery = from card in allCards
+                            where card.name == cardName
+                            orderby card.name ascending
+                            select card;
+            foreach ( Card card in cardQuery )
+            {
+                Console.WriteLine("-------SelectedCard-------");
+                Console.WriteLine("card number = " + card.number);
+                Console.WriteLine("card text = " + card.text);
+                Console.WriteLine("card power = " + card.power);
+                Console.WriteLine("card toughness = " + card.toughness);
+                Console.WriteLine("card manaCost = " + card.manaCost);
+                Console.WriteLine("card colors = " + card.colors);
+                Console.WriteLine("------EndSelectedCard-------");
+                Console.ReadLine();
+            }
+
+            
+        }
+
         static void getSentences(List<Card>mycards)
         {
             var masterList = new List<String>();
