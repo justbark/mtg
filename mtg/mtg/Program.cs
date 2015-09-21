@@ -12,6 +12,14 @@ namespace mtg
     public static class Shared
     {
         public static List<Card> cards = new List<Card>();
+        public static List<Card> artifacts = new List<Card>();
+        public static List<Card> creature = new List<Card>();
+        public static List<Card> enchantment = new List<Card>();
+        public static List<Card> instant = new List<Card>();
+        public static List<Card> land = new List<Card>();
+        public static List<Card> planeswalker = new List<Card>();
+        public static List<Card> tribal = new List<Card>();
+        public static List<Card> sorcery = new List<Card>();
     }
 
     class Program
@@ -53,6 +61,12 @@ namespace mtg
                 Console.WriteLine(cards[i].name);
             }*/
 
+
+            //=======================================================================================
+            //this is where we are going to sort lists
+            //=======================================================================================
+            
+
             string line;
             Console.WriteLine(Shared.cards.Count); // total number of cards
             line = Console.ReadLine(); //wait for text to generate all sentences file
@@ -65,10 +79,46 @@ namespace mtg
                 userSelCard = Console.ReadLine();
                 retrieveCard(userSelCard);
             }
+            if (line == "generateDeck")
+            {
+                generateDeck(60, 60);
+            }
             
 
 
         }
+
+        private static void generateDeck(int minCards, int maxCards)
+        {
+            Deck newDeck = new Deck();
+
+            Random rand = new Random();
+            int numCards = rand.Next(minCards, maxCards);
+
+            int cardIndex;
+
+            for (int i = 0; i < numCards; i++)
+            {
+                cardIndex = rand.Next(0, Shared.cards.Count());
+                newDeck.deckCardList.Add(Shared.cards[cardIndex]);
+            }
+        }
+
+        private static generateName(Deck deck)
+        {
+            // name the deck after some card in the deck, or card color.
+            // These strings should be informed by the contents of newDeck.cards
+            String properNoun;
+            String adjective;
+            String color;
+ 
+ 
+
+            // example: "justin's big black deck"
+            newDeck.name = properNoun + "\'s" + " " + adjective + " " + color + " deck";
+            return "blah";
+        }
+
         static void retrieveCard(string selectedCard)
         {
             string cardName = selectedCard;
