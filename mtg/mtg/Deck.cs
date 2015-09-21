@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace mtg
 {
-    class Deck
+    public class Deck
     {
         public List<Card> deckCardList = new List<Card>();
         string deckName;

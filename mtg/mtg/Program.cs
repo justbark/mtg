@@ -20,6 +20,7 @@ namespace mtg
         public static List<Card> planeswalker = new List<Card>();
         public static List<Card> tribal = new List<Card>();
         public static List<Card> sorcery = new List<Card>();
+        string[] colors = new string[] { "Blue", "Black", "Green", "Red", "White" };
     }
 
     class Program
@@ -65,8 +66,18 @@ namespace mtg
             //=======================================================================================
             //this is where we are going to sort lists
             //=======================================================================================
-            
+            Shared.artifacts = Shared.cards.Where(x => x.type.Contains("Artifact")).ToList();
+            Shared.creature = Shared.cards.Where(x => x.type.Contains("creature")).ToList();
+            Shared.enchantment = Shared.cards.Where(x => x.type.Contains("enchantment")).ToList();
+            Shared.instant = Shared.cards.Where(x => x.type.Contains("instant")).ToList();
+            Shared.land = Shared.cards.Where(x => x.type.Contains("land")).ToList();
+            Shared.planeswalker = Shared.cards.Where(x => x.type.Contains("planeswalker")).ToList();
+            Shared.tribal = Shared.cards.Where(x => x.type.Contains("tribal")).ToList();
+            Shared.sorcery = Shared.cards.Where(x => x.type.Contains("sorcery")).ToList();
 
+            //=======================================================================================
+            //gets user input
+            //=======================================================================================
             string line;
             Console.WriteLine(Shared.cards.Count); // total number of cards
             line = Console.ReadLine(); //wait for text to generate all sentences file
@@ -88,11 +99,12 @@ namespace mtg
 
         }
 
-        private static void generateDeck(int minCards, int maxCards)
+        public static void generateDeck(int minCards, int maxCards)
         {
             Deck newDeck = new Deck();
 
             Random rand = new Random();
+            string primaryColor = Shared.colors[rand.Next(0, Shared.colors.Length)];
             int numCards = rand.Next(minCards, maxCards);
 
             int cardIndex;
@@ -104,7 +116,8 @@ namespace mtg
             }
         }
 
-        private static generateName(Deck deck)
+        
+        /*private static generateName(Deck deck)
         {
             // name the deck after some card in the deck, or card color.
             // These strings should be informed by the contents of newDeck.cards
@@ -117,7 +130,7 @@ namespace mtg
             // example: "justin's big black deck"
             newDeck.name = properNoun + "\'s" + " " + adjective + " " + color + " deck";
             return "blah";
-        }
+        }*/
 
         static void retrieveCard(string selectedCard)
         {

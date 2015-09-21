@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace mtg
 {
-    class Card
+    public class Card
     {
         [JsonProperty("name")]
         public string name { get; set; }
