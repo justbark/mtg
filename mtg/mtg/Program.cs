@@ -20,7 +20,6 @@ namespace mtg
         public static List<Card> planeswalker = new List<Card>();
         public static List<Card> tribal = new List<Card>();
         public static List<Card> sorcery = new List<Card>();
-        string[] colors = new string[] { "Blue", "Black", "Green", "Red", "White" };
     }
 
     class Program
@@ -78,22 +77,27 @@ namespace mtg
             //=======================================================================================
             //gets user input
             //=======================================================================================
-            string line;
             Console.WriteLine(Shared.cards.Count); // total number of cards
-            line = Console.ReadLine(); //wait for text to generate all sentences file
-            if ( line == "getSentences" )
-                getSentences(Shared.cards);
-            if (line == "getCard")
+            string line = "";
+            while(line != "exit" && line != "quit" && line != "q")
             {
-                string userSelCard;
-                Console.WriteLine("type card name.");
-                userSelCard = Console.ReadLine();
-                retrieveCard(userSelCard);
+                line = Console.ReadLine(); //wait for text to generate all sentences file
+                if (line == "getSentences")
+                    getSentences(Shared.cards);
+                if (line == "getCard")
+                {
+                    string userSelCard;
+                    Console.WriteLine("type card name.");
+                    userSelCard = Console.ReadLine();
+                    retrieveCard(userSelCard);
+                }
+                if (line == "generateDeck")
+                {
+                    generateDeck(60, 60);
+                }
+                line = "";
             }
-            if (line == "generateDeck")
-            {
-                generateDeck(60, 60);
-            }
+
             
 
 
@@ -101,11 +105,16 @@ namespace mtg
 
         public static void generateDeck(int minCards, int maxCards)
         {
+            string[] colors = new string[] { "Blue", "Black", "Green", "Red", "White" };
             Deck newDeck = new Deck();
 
             Random rand = new Random();
-            string primaryColor = Shared.colors[rand.Next(0, Shared.colors.Length)];
-            int numCards = rand.Next(minCards, maxCards);
+            int index = rand.Next(0, colors.Length);
+            Console.WriteLine(index);
+            string primaryColor = colors[index];
+            Console.WriteLine(primaryColor);
+            Console.ReadLine();
+            /*int numCards = rand.Next(minCards, maxCards);
 
             int cardIndex;
 
@@ -113,7 +122,7 @@ namespace mtg
             {
                 cardIndex = rand.Next(0, Shared.cards.Count());
                 newDeck.deckCardList.Add(Shared.cards[cardIndex]);
-            }
+            }*/
         }
 
         
