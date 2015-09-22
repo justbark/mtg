@@ -105,6 +105,7 @@ namespace mtg
 
         public static void generateDeck(int minCards, int maxCards)
         {
+            double percentRemaining = 1;
             string[] colors = new string[] { "Blue", "Black", "Green", "Red", "White" };
             Deck newDeck = new Deck();
 
@@ -130,16 +131,33 @@ namespace mtg
             //================================================================
 
             //--------minimum percentages----------
-            double percInstant = 0.17;
-            double percSorcery = 0.17;
-            double percCreature = 0.24;
-            double percEnchantment = 0.17;
-            double percPlaneswalker = 0.05;
-            double percArtifact = 0.10;
-            double percTribal = 0.10;
+            double minPercInstant = 0.17;
+            double minPercSorcery = 0.17;
+            double minPercCreature = 0.24;
+            double minPercEnchantment = 0.17;
+            double minPercPlaneswalker = 0.05;
+            double minPercArtifact = 0.10;
+            double minPercTribal = 0.10;
 
             //---------maximum percentages---------
+            double maxPercInstant = 0.20;
+            double maxPercSorcery = 0.20;
+            double maxPercCreature = 0.50;
+            double maxPercEnchantment = 0.20;
+            double maxPercPlaneswalker = 0.10;
+            double maxPercArtifact = 0.50;
+            double maxPercTribal = 0.20;
 
+            //================================================================
+            //card selection 
+            //================================================================
+            double quantInstant = rand.Next(minPercInstant, maxPercInstant);
+            double quantSorcery = rand.Next(minPercSorcery, maxPercSorcery);
+            double quantCreature = rand.Next(minPercCreature, maxPercCreature);
+            double quantEnchantment = rand.Next(minPercEnchantment, maxPercEnchantment);
+            double quantPlaneswalker = rand.Next(minPercPlaneswalker, maxPercPlaneswalker);
+            double quantArtifact = rand.Next(minPercArtifact, maxPercArtifact);
+            double quantTribal = rand.Next(minPercTribal, maxPercTribal);
 
             //================================================================
             //landSection
