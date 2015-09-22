@@ -20,6 +20,7 @@ namespace mtg
         public static List<Card> planeswalker = new List<Card>();
         public static List<Card> tribal = new List<Card>();
         public static List<Card> sorcery = new List<Card>();
+        public static int numOfTypes = 6;
     }
 
     class Program
@@ -97,15 +98,10 @@ namespace mtg
                 }
                 line = "";
             }
-
-            
-
-
         }
 
         public static void generateDeck(int minCards, int maxCards)
         {
-            double percentRemaining = 1;
             string[] colors = new string[] { "Blue", "Black", "Green", "Red", "White" };
             Deck newDeck = new Deck();
 
@@ -119,18 +115,25 @@ namespace mtg
             Console.WriteLine(numCards);
 
             //================================================================
+            //generate Weights
+            //================================================================
+            mutate(5, newDeck);
+            newDeck.PrintWeights();
+
+            //================================================================
             //deck quantities
             //================================================================
             int maxLand = 30;
             int minLand = 23;
             int maxCopyOfCard = 4;
             int maxColors = 2;
+            double percentRemaining = 1;
 
             //================================================================
             //percentages for deck 
             //================================================================
 
-            //--------minimum percentages----------
+            /*--------minimum percentages----------
             double minPercInstant = 0.17;
             double minPercSorcery = 0.17;
             double minPercCreature = 0.24;
@@ -146,27 +149,29 @@ namespace mtg
             double maxPercEnchantment = 0.20;
             double maxPercPlaneswalker = 0.10;
             double maxPercArtifact = 0.50;
-            double maxPercTribal = 0.20;
+            double maxPercTribal = 0.20;*/
 
             //================================================================
             //card selection 
             //================================================================
-            double quantInstant = rand.Next(minPercInstant, maxPercInstant);
-            double quantSorcery = rand.Next(minPercSorcery, maxPercSorcery);
-            double quantCreature = rand.Next(minPercCreature, maxPercCreature);
-            double quantEnchantment = rand.Next(minPercEnchantment, maxPercEnchantment);
-            double quantPlaneswalker = rand.Next(minPercPlaneswalker, maxPercPlaneswalker);
-            double quantArtifact = rand.Next(minPercArtifact, maxPercArtifact);
-            double quantTribal = rand.Next(minPercTribal, maxPercTribal);
+            /*double quantInstant = GetRandomNumber(minPercInstant, maxPercInstant);
+            double quantSorcery = GetRandomNumber(minPercSorcery, maxPercSorcery);
+            double quantCreature = GetRandomNumber(minPercCreature, maxPercCreature);
+            double quantEnchantment = GetRandomNumber(minPercEnchantment, maxPercEnchantment);
+            double quantPlaneswalker = GetRandomNumber(minPercPlaneswalker, maxPercPlaneswalker);
+            double quantArtifact = GetRandomNumber(minPercArtifact, maxPercArtifact);
+            double quantTribal = GetRandomNumber(minPercTribal, maxPercTribal);
+
+            Console.WriteLine(quantInstant + quantSorcery + quantCreature + quantEnchantment + quantPlaneswalker + quantArtifact + quantTribal);*/
 
             //================================================================
             //landSection
             //================================================================
-            int landQuantity = rand.Next(minLand, maxLand);
+            /*int landQuantity = rand.Next(minLand, maxLand);
             Console.WriteLine("land quatity = " + landQuantity);
             int cardsRemaining = numCards - landQuantity;
             Console.WriteLine(" Cards remaining = " + cardsRemaining);
-            //this is just determining the number of lands for the deck. not actually selecting them
+            //this is just determining the number of lands for the deck. not actually selecting them*/
 
 
             /*quantOLand = 25
@@ -210,9 +215,38 @@ namespace mtg
             newDeck.name = properNoun + "\'s" + " " + adjective + " " + color + " deck";
             return "blah";
         }*/
+        public static void mutate(int passes, Deck deck)
+        {
+            Random rand = new Random();
+            for (int i = 0; i < passes; i++)
+            {
+
+                int rand_a = 0;
+                int rand_b = 0;
+                while (rand_a == rand_b)
+                {
+                    rand_a = rand.Next(0, deck.weights.Count - 1);
+                    rand_b = rand.Next(0, deck.weights.Count - 1);
+                }
+
+
+                float mutationMagnitude = (float)(rand.NextDouble() * deck.weights.Average());
+
+                deck.weights[rand_a] -= mutationMagnitude;
+                deck.weights[rand_b] += mutationMagnitude;
+            }
+        }
+
+        public static double GetRandomNumber(double minimum, double maximum)
+        {
+            //this is used only when a fractional number is needed
+            Random random = new Random();
+            return random.NextDouble() * (maximum - minimum) + minimum;
+        }
 
         static void retrieveCard(string selectedCard)
         {
+            //user can type the name of a card to display
             string cardName = selectedCard;
             var cardQuery = from card in Shared.cards
                             where card.name == cardName
