@@ -66,13 +66,13 @@ namespace mtg
             //this is where we are going to sort lists
             //=======================================================================================
             Shared.artifacts = Shared.cards.Where(x => x.type.Contains("Artifact")).ToList();
-            Shared.creature = Shared.cards.Where(x => x.type.Contains("creature")).ToList();
-            Shared.enchantment = Shared.cards.Where(x => x.type.Contains("enchantment")).ToList();
-            Shared.instant = Shared.cards.Where(x => x.type.Contains("instant")).ToList();
-            Shared.land = Shared.cards.Where(x => x.type.Contains("land")).ToList();
-            Shared.planeswalker = Shared.cards.Where(x => x.type.Contains("planeswalker")).ToList();
-            Shared.tribal = Shared.cards.Where(x => x.type.Contains("tribal")).ToList();
-            Shared.sorcery = Shared.cards.Where(x => x.type.Contains("sorcery")).ToList();
+            Shared.creature = Shared.cards.Where(x => x.type.Contains("Creature")).ToList();
+            Shared.enchantment = Shared.cards.Where(x => x.type.Contains("Enchantment")).ToList();
+            Shared.instant = Shared.cards.Where(x => x.type.Contains("Instant")).ToList();
+            Shared.land = Shared.cards.Where(x => x.type.Contains("Land")).ToList();
+            Shared.planeswalker = Shared.cards.Where(x => x.type.Contains("Planeswalker")).ToList();
+            Shared.tribal = Shared.cards.Where(x => x.type.Contains("Tribal")).ToList();
+            Shared.sorcery = Shared.cards.Where(x => x.type.Contains("Sorcery")).ToList();
 
             //=======================================================================================
             //gets user input
@@ -113,10 +113,62 @@ namespace mtg
             Console.WriteLine(index);
             string primaryColor = colors[index];
             Console.WriteLine(primaryColor);
-            Console.ReadLine();
-            /*int numCards = rand.Next(minCards, maxCards);
 
-            int cardIndex;
+            int numCards = rand.Next(minCards, maxCards);
+            Console.WriteLine(numCards);
+
+            //================================================================
+            //deck quantities
+            //================================================================
+            int maxLand = 30;
+            int minLand = 23;
+            int maxCopyOfCard = 4;
+            int maxColors = 2;
+
+            //================================================================
+            //percentages for deck 
+            //================================================================
+
+            //--------minimum percentages----------
+            double percInstant = 0.17;
+            double percSorcery = 0.17;
+            double percCreature = 0.24;
+            double percEnchantment = 0.17;
+            double percPlaneswalker = 0.05;
+            double percArtifact = 0.10;
+            double percTribal = 0.10;
+
+            //---------maximum percentages---------
+
+
+            //================================================================
+            //landSection
+            //================================================================
+            int landQuantity = rand.Next(minLand, maxLand);
+            Console.WriteLine("land quatity = " + landQuantity);
+            int cardsRemaining = numCards - landQuantity;
+            Console.WriteLine(" Cards remaining = " + cardsRemaining);
+            //this is just determining the number of lands for the deck. not actually selecting them
+
+
+            /*quantOLand = 25
+            rem  =60- 25 = 35
+            max/minArtType
+            0.20 0.10
+            QuantArtType = rand.Next(minArtType, maxArtType)
+            0.1578
+            rem*QuantArtType =
+            3.8
+            4
+            rem -= 4
+            rem = rem - 4;
+             newDeck.cards.Add(Shared.artifacts[whateverIndex]);
+             the line above is how you get a new card into the deck list*/
+
+
+
+
+            /*int cardIndex;
 
             for (int i = 0; i < numCards; i++)
             {
