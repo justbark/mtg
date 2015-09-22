@@ -20,7 +20,7 @@ namespace mtg
         public static List<Card> planeswalker = new List<Card>();
         public static List<Card> tribal = new List<Card>();
         public static List<Card> sorcery = new List<Card>();
-        public static int numOfTypes = 6;
+        public static int numOfTypes = 7;
     }
 
     class Program
@@ -217,6 +217,7 @@ namespace mtg
         }*/
         public static void mutate(int passes, Deck deck)
         {
+            double fudge = 0.33;
             Random rand = new Random();
             for (int i = 0; i < passes; i++)
             {
@@ -230,10 +231,17 @@ namespace mtg
                 }
 
 
-                float mutationMagnitude = (float)(rand.NextDouble() * deck.weights.Average());
+                float mutationMagnitude = (float)(rand.NextDouble() * deck.weights.Average() * fudge);
+                Console.WriteLine("mutation magnitude = " + mutationMagnitude);
+
+                if (deck.weights[rand_a] - mutationMagnitude <= 0.1 || deck.weights[rand_b] + mutationMagnitude >= 0.90)
+                {
+                    continue;
+                }
 
                 deck.weights[rand_a] -= mutationMagnitude;
                 deck.weights[rand_b] += mutationMagnitude;
+                
             }
         }
 
