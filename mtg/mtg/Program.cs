@@ -119,16 +119,22 @@ namespace mtg
             //================================================================
             mutate(5, newDeck);
             newDeck.PrintWeights();
-
             //================================================================
-            //deck quantities
+            //landSection
             //================================================================
             int maxLand = 30;
             int minLand = 23;
+            int landQuantity = rand.Next(minLand, maxLand);
+            Console.WriteLine("land quatity = " + landQuantity);
+            int cardsRemaining = numCards - landQuantity;
+            Console.WriteLine(" Cards remaining = " + cardsRemaining);
+            //this is just determining the number of lands for the deck. not actually selecting them
+
+            //================================================================
+            //deck quantities
+            //===============================================================
             int maxCopyOfCard = 4;
             int maxColors = 2;
-            double percentRemaining = 1;
-
             //================================================================
             //percentages for deck 
             //================================================================
@@ -154,24 +160,17 @@ namespace mtg
             //================================================================
             //card selection 
             //================================================================
-            /*double quantInstant = GetRandomNumber(minPercInstant, maxPercInstant);
-            double quantSorcery = GetRandomNumber(minPercSorcery, maxPercSorcery);
-            double quantCreature = GetRandomNumber(minPercCreature, maxPercCreature);
-            double quantEnchantment = GetRandomNumber(minPercEnchantment, maxPercEnchantment);
-            double quantPlaneswalker = GetRandomNumber(minPercPlaneswalker, maxPercPlaneswalker);
-            double quantArtifact = GetRandomNumber(minPercArtifact, maxPercArtifact);
-            double quantTribal = GetRandomNumber(minPercTribal, maxPercTribal);
+            double quantInstant = newDeck.weights[0] * cardsRemaining;
+            double quantSorcery = newDeck.weights[1] * cardsRemaining;
+            double quantCreature = newDeck.weights[2] * cardsRemaining;
+            double quantEnchantment = newDeck.weights[3] * cardsRemaining;
+            double quantPlaneswalker = newDeck.weights[4] * cardsRemaining;
+            double quantArtifact = newDeck.weights[5] * cardsRemaining;
+            double quantTribal = newDeck.weights[6] * cardsRemaining;
 
-            Console.WriteLine(quantInstant + quantSorcery + quantCreature + quantEnchantment + quantPlaneswalker + quantArtifact + quantTribal);*/
+            Console.WriteLine("total cards = " + quantInstant + quantSorcery + quantCreature + quantEnchantment + quantPlaneswalker + quantArtifact + quantTribal);
 
-            //================================================================
-            //landSection
-            //================================================================
-            /*int landQuantity = rand.Next(minLand, maxLand);
-            Console.WriteLine("land quatity = " + landQuantity);
-            int cardsRemaining = numCards - landQuantity;
-            Console.WriteLine(" Cards remaining = " + cardsRemaining);
-            //this is just determining the number of lands for the deck. not actually selecting them*/
+            
 
 
             /*quantOLand = 25
@@ -217,7 +216,7 @@ namespace mtg
         }*/
         public static void mutate(int passes, Deck deck)
         {
-            double fudge = 0.33;
+            double fudge = 0.33; // this adjusts our mutation amplitude
             Random rand = new Random();
             for (int i = 0; i < passes; i++)
             {
@@ -229,19 +228,14 @@ namespace mtg
                     rand_a = rand.Next(0, deck.weights.Count - 1);
                     rand_b = rand.Next(0, deck.weights.Count - 1);
                 }
-
-
                 float mutationMagnitude = (float)(rand.NextDouble() * deck.weights.Average() * fudge);
-                Console.WriteLine("mutation magnitude = " + mutationMagnitude);
-
+                //Console.WriteLine("mutation magnitude = " + mutationMagnitude);
                 if (deck.weights[rand_a] - mutationMagnitude <= 0.1 || deck.weights[rand_b] + mutationMagnitude >= 0.90)
                 {
                     continue;
                 }
-
                 deck.weights[rand_a] -= mutationMagnitude;
                 deck.weights[rand_b] += mutationMagnitude;
-                
             }
         }
 
