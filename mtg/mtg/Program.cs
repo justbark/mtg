@@ -160,17 +160,22 @@ namespace mtg
             //================================================================
             //card selection 
             //================================================================
-            double quantInstant = newDeck.weights[0] * cardsRemaining;
-            double quantSorcery = newDeck.weights[1] * cardsRemaining;
-            double quantCreature = newDeck.weights[2] * cardsRemaining;
-            double quantEnchantment = newDeck.weights[3] * cardsRemaining;
-            double quantPlaneswalker = newDeck.weights[4] * cardsRemaining;
-            double quantArtifact = newDeck.weights[5] * cardsRemaining;
-            double quantTribal = newDeck.weights[6] * cardsRemaining;
+            int quantInstant = (int)(newDeck.weights[0] * cardsRemaining);
+            int quantSorcery = (int)(newDeck.weights[1] * cardsRemaining);
+            int quantCreature = (int)(newDeck.weights[2] * cardsRemaining);
+            int quantEnchantment = (int)(newDeck.weights[3] * cardsRemaining);
+            int quantPlaneswalker = (int)(newDeck.weights[4] * cardsRemaining);
+            int quantArtifact = (int)(newDeck.weights[5] * cardsRemaining);
+            int quantTribal = (int)(newDeck.weights[6] * cardsRemaining);
 
-            Console.WriteLine("total cards = " + quantInstant + quantSorcery + quantCreature + quantEnchantment + quantPlaneswalker + quantArtifact + quantTribal);
-
-            
+            int totalCards = (quantInstant + quantSorcery + quantCreature + quantEnchantment + quantPlaneswalker + quantArtifact + quantTribal);
+            Console.WriteLine("total cards = " + totalCards);
+            int numGeneratedCards = landQuantity + totalCards;
+            Console.WriteLine("numGeneratedCards = " + numGeneratedCards);
+            int requiredAdjustment = numCards - numGeneratedCards;
+            Console.WriteLine("requiredAdjustment = " + requiredAdjustment);
+            Console.WriteLine("Joes total cards =\n qI=" + quantInstant + "\n qS=" + quantSorcery + "\n qC="  + quantCreature + "\n qE="  + quantEnchantment + "\n qP="  + quantPlaneswalker + "\n qA="  + quantArtifact + "\n qT="  + quantTribal);
+            Console.WriteLine("land quantity = " + landQuantity);
 
 
             /*quantOLand = 25
