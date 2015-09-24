@@ -168,15 +168,182 @@ namespace mtg
             int quantArtifact = (int)Math.Round(newDeck.weights[5] * cardsRemaining);
             int quantTribal = (int)Math.Round(newDeck.weights[6] * cardsRemaining);
 
+            //get the number of cards for the deck via the random deck quantities
             int totalCards = (quantInstant + quantSorcery + quantCreature + quantEnchantment + quantPlaneswalker + quantArtifact + quantTribal);
             Console.WriteLine("total cards = " + totalCards);
+            //get the total number of cards including land
             int numGeneratedCards = landQuantity + totalCards;
             Console.WriteLine("numGeneratedCards = " + numGeneratedCards);
+            //this is the number of cards that the deck is missing, due to decimals
             int requiredAdjustment = numCards - numGeneratedCards; // FIX ME. do something more intelligent with this value.
             Console.WriteLine("requiredAdjustment = " + requiredAdjustment);
             Console.WriteLine("Joes total cards =\n qI=" + quantInstant + "\n qS=" + quantSorcery + "\n qC="  + quantCreature + "\n qE="  + quantEnchantment + "\n qP="  + quantPlaneswalker + "\n qA="  + quantArtifact + "\n qT="  + quantTribal);
             Console.WriteLine("land quantity = " + landQuantity);
 
+            while (quantInstant != 0)
+            {
+                int randomCardIndex = rand.Next(0, Shared.instant.Count);
+                Card randomCard = Shared.instant[randomCardIndex];
+                //create a subset of random cards. This keeps track to see if there are multiples of 1 card
+                if (newDeck.deckCardList.Where(x => x == randomCard).Count() >= maxCopyOfCard)
+                {
+                    Console.WriteLine("Oops I picked a card too many times, moving on.");
+                    continue;
+                }
+                if (!randomCard.colors.Contains(primaryColor))
+                {
+                    Console.WriteLine("this card is not the correct color. Moving on.");
+                    continue;
+                }
+                newDeck.deckCardList.Add(randomCard);
+                quantInstant--;
+                Console.WriteLine("Ive selected " + randomCard.name + "\n" + "the deckSize is now " + newDeck.deckCardList.Count());
+                    
+            }
+
+            while (quantSorcery != 0)
+            {
+                int randomCardIndex = rand.Next(0, Shared.instant.Count);
+                Card randomCard = Shared.instant[randomCardIndex];
+                //create a subset of random cards. This keeps track to see if there are multiples of 1 card
+                if (newDeck.deckCardList.Where(x => x == randomCard).Count() >= maxCopyOfCard)
+                {
+                    Console.WriteLine("Oops I picked a card too many times, moving on.");
+                    continue;
+                }
+                if (!randomCard.colors.Contains(primaryColor))
+                {
+                    Console.WriteLine("this card is not the correct color. Moving on.");
+                    continue;
+                }
+                newDeck.deckCardList.Add(randomCard);
+                quantSorcery--;
+                Console.WriteLine("Ive selected " + randomCard.name + "\n" + "the deckSize is now " + newDeck.deckCardList.Count());
+
+            }
+
+            while (quantCreature != 0)
+            {
+                int randomCardIndex = rand.Next(0, Shared.instant.Count);
+                Card randomCard = Shared.instant[randomCardIndex];
+                //create a subset of random cards. This keeps track to see if there are multiples of 1 card
+                if (newDeck.deckCardList.Where(x => x == randomCard).Count() >= maxCopyOfCard)
+                {
+                    Console.WriteLine("Oops I picked a card too many times, moving on.");
+                    continue;
+                }
+                if (!randomCard.colors.Contains(primaryColor))
+                {
+                    Console.WriteLine("this card is not the correct color. Moving on.");
+                    continue;
+                }
+                newDeck.deckCardList.Add(randomCard);
+                quantCreature--;
+                Console.WriteLine("Ive selected " + randomCard.name + "\n" + "the deckSize is now " + newDeck.deckCardList.Count());
+
+            }
+
+            while (quantEnchantment != 0)
+            {
+                int randomCardIndex = rand.Next(0, Shared.instant.Count);
+                Card randomCard = Shared.instant[randomCardIndex];
+                //create a subset of random cards. This keeps track to see if there are multiples of 1 card
+                if (newDeck.deckCardList.Where(x => x == randomCard).Count() >= maxCopyOfCard)
+                {
+                    Console.WriteLine("Oops I picked a card too many times, moving on.");
+                    continue;
+                }
+                if (!randomCard.colors.Contains(primaryColor))
+                {
+                    Console.WriteLine("this card is not the correct color. Moving on.");
+                    continue;
+                }
+                newDeck.deckCardList.Add(randomCard);
+                quantEnchantment--;
+                Console.WriteLine("Ive selected " + randomCard.name + "\n" + "the deckSize is now " + newDeck.deckCardList.Count());
+
+            }
+
+            while (quantPlaneswalker != 0)
+            {
+                int randomCardIndex = rand.Next(0, Shared.instant.Count);
+                Card randomCard = Shared.instant[randomCardIndex];
+                //create a subset of random cards. This keeps track to see if there are multiples of 1 card
+                if (newDeck.deckCardList.Where(x => x == randomCard).Count() >= maxCopyOfCard)
+                {
+                    Console.WriteLine("Oops I picked a card too many times, moving on.");
+                    continue;
+                }
+                if (!randomCard.colors.Contains(primaryColor))
+                {
+                    Console.WriteLine("this card is not the correct color. Moving on.");
+                    continue;
+                }
+                newDeck.deckCardList.Add(randomCard);
+                quantPlaneswalker--;
+                Console.WriteLine("Ive selected " + randomCard.name + "\n" + "the deckSize is now " + newDeck.deckCardList.Count());
+
+            }
+
+            while (quantArtifact != 0)
+            {
+                int randomCardIndex = rand.Next(0, Shared.instant.Count);
+                Card randomCard = Shared.instant[randomCardIndex];
+                //create a subset of random cards. This keeps track to see if there are multiples of 1 card
+                if (newDeck.deckCardList.Where(x => x == randomCard).Count() >= maxCopyOfCard)
+                {
+                    Console.WriteLine("Oops I picked a card too many times, moving on.");
+                    continue;
+                }
+                if (!randomCard.colors.Contains(primaryColor))
+                {
+                    Console.WriteLine("this card is not the correct color. Moving on.");
+                    continue;
+                }
+                newDeck.deckCardList.Add(randomCard);
+                quantArtifact--;
+                Console.WriteLine("Ive selected " + randomCard.name + "\n" + "the deckSize is now " + newDeck.deckCardList.Count());
+
+            }
+
+            while (quantTribal != 0)
+            {
+                int randomCardIndex = rand.Next(0, Shared.instant.Count);
+                Card randomCard = Shared.instant[randomCardIndex];
+                //create a subset of random cards. This keeps track to see if there are multiples of 1 card
+                if (newDeck.deckCardList.Where(x => x == randomCard).Count() >= maxCopyOfCard)
+                {
+                    Console.WriteLine("Oops I picked a card too many times, moving on.");
+                    continue;
+                }
+                if (!randomCard.colors.Contains(primaryColor))
+                {
+                    Console.WriteLine("this card is not the correct color. Moving on.");
+                    continue;
+                }
+                newDeck.deckCardList.Add(randomCard);
+                quantTribal--;
+                Console.WriteLine("Ive selected " + randomCard.name + "\n" + "the deckSize is now " + newDeck.deckCardList.Count());
+
+            }
+            //======================================================
+            //adding land to the deck
+            //======================================================
+
+            Card landCard = Shared.land.Where(x => x.colors.Contains(primaryColor)).First();
+            if (landCard != null)
+            {
+                for (int i = 0; i < landQuantity; i++)
+                {
+                    newDeck.deckCardList.Add(landCard);
+                }
+            }
+            else
+            {
+                Console.WriteLine("there has been an error. No mana card found");
+                return;
+            }
+                
 
             /*quantOLand = 25
             rem  =60- 25 = 35
@@ -204,7 +371,6 @@ namespace mtg
             }*/
         }
 
-        
         /*private static generateName(Deck deck)
         {
             // name the deck after some card in the deck, or card color.
